@@ -15,7 +15,7 @@ const botonMascotaJugador = document.getElementById("botonSeleccionarMascotas")
 const contenedorAtaque = document.getElementById("contenedorAtaque")
 
 let mokepones= []
-let ataqueJugador
+//let ataqueJugador
 let ataqueEnemigo
 let opcionesDeMokepones
 let inputHypodoge
@@ -25,6 +25,8 @@ let ataquesMokepon
 let botonFuego
 let botonAgua 
 let botonTierra
+let botones = []
+let ataqueJugador=[]
 let mascotaJugador
 let vidasJugador = 3
 let vidasEnemigo = 3
@@ -136,48 +138,52 @@ function extraerAtaques(mascotaJugador){
 function mostrarAtaques(ataques){
     ataques.forEach((ataque) => {
         ataquesMokepon = `
-        <button id=${ataque.id} class="boton-ataque">${ataque.nombre}</button>
+        <button id=${ataque.id} class="boton-ataque BAtaque">${ataque.nombre}</button>
         `
         contenedorAtaques.innerHTML += ataquesMokepon
          })
         botonFuego = document.getElementById("botonFuego")
         botonAgua = document.getElementById("botonAgua")
         botonTierra = document.getElementById("botonTierra")
-
-        botonFuego.addEventListener("click",ataqueFuego)
-        botonAgua.addEventListener("click",ataqueAgua)
-        botonTierra.addEventListener("click",ataqueTierra)
+        //es un comando nuevo querySelectorAll en vez de traer un elemento por su id, trae todos los que cumplen una condicion, en este caso una clase
+        botones = document.querySelectorAll(".BAtaque")
     }
     
-    
+function secuenciaAtaque() {
+    botones.forEach((boton) => {
+        boton.addEventListener("click",(e) => {
+            if (e.target.textContent === "Fuego 🔥") {
+                ataqueJugador.push ("FUEGO")
+                console.log(ataqueJugador)
+                boton.style.background = "#125f58"
+            } else if (e.target.textContent === "Agua 💧") {
+                ataqueJugador.push ("AGUA")
+                console.log(ataqueJugador)
+                boton.style.background = "#125f58"
+            } else  {
+                ataqueJugador.push ("IERRA")
+                console.log(ataqueJugador)
+                boton.style.background = "#125f58"
+            }
+        })
+            
+    })
+}
+
+
+
 function seleccionarMascotaEnemiga() {
     let mascotaAleatorio = aleatorio(0,mokepones.length-1)
 
    pMascotaEnemiga.innerHTML = mokepones[mascotaAleatorio].nombre
    imagenEnemiga.src = mokepones[mascotaAleatorio].foto
+   secuenciaAtaque()
 }
 
 function aleatorio(min,max) {
     return Math.floor(Math.random()*(max-min+1)+min)
 }
 
-
-
-
-function ataqueFuego(){
-    ataqueJugador="FUEGO"
-    ataqueAleatrorioEnemigo()
-}
-
-function ataqueAgua(){
-    ataqueJugador="AGUA"
-    ataqueAleatrorioEnemigo()
-}
-
-function ataqueTierra(){
-    ataqueJugador="TIERRA"
-    ataqueAleatrorioEnemigo()
-}
 
 function ataqueAleatrorioEnemigo(){
     
