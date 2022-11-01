@@ -97,7 +97,7 @@ input {
     margin: 7px;
     border: 8px solid orange;
     border-color: transparent;
-    width: 180px;
+    width: 100px;
     height: 55px;
     color: #DFF6FF;
     font-size: 15px;
@@ -158,6 +158,16 @@ input {
 .vidas {
     margin: 10px;
     font-size: 50px;
+}
+
+#ver-mapa {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#mapa {
+    background-color: aliceblue;
 }
 
 @media (max-width: 360px) {
